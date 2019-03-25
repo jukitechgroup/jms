@@ -1,0 +1,22 @@
+auto lo
+iface lo inet loopback
+
+auto wlan0
+allow-hotplug wlan0
+#iface wlan0 inet dhcp
+iface wlan0 inet static
+        address 192.168.44.111
+        netmask 255.255.255.0
+        gateway 192.168.1.1
+        dns-nameservers 8.8.8.8
+#    wpa-ssid "jukitech_demo"
+#    wpa-psk "passwd24"
+
+auto eth0
+allow-hotplug eth0
+#iface eth0 inet dhcp
+iface eth0 inet static
+        address 192.168.1.220
+        netmask 255.255.255.0
+        gateway 192.168.1.99
+        dns-nameservers 192.168.1.1 8.8.8.8
