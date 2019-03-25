@@ -1,0 +1,46 @@
+<html>
+<head>
+<link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='style.css') }}">
+<script type = "text/javascript" src = "{{ url_for('static', filename = 'd3.v3.min.js') }}"></script>
+</head>
+<body>
+	<div id="page" align="center">
+		<div id="content" style="width:1200px">
+		<div id="logo">
+				
+			</div> 
+			<div id="topheader">
+		<div align="left" class="bodytext">
+			<div class="leftpic"><img src="{{url_for('static', filename='JMS_RGB_72dpi.png')}}" width="120" height="80"></div>
+			<div class="rightpic"><img src="{{url_for('static', filename='JG_RGB_72dpi.png')}}" width="120" height="60"></div>			
+					<br />
+					
+					
+				</div>
+				
+			</div>
+			<div id="menu">
+				<div align="middle" style="padding:5px;">
+                                <a class="btn22" 	href="{{url_for('live')}}"><span>Sensorit</span> </a>&nbsp;
+				<a class="btn22" 	href="{{url_for('historia')}}"><span>Historia</span> </a>&nbsp;
+				<!---  <a class="btn22" 	href="{{url_for('live')}}"><span>Sensorit</span> </a>&nbsp; --->
+				<a class="btn22" 	href="{{url_for('yllapito')}}"><span>Ylläpito</span> </a>&nbsp;
+	
+				<div id="time" class="btn22"></div>	
+				</div>
+				
+			</div>
+			<div id="action">
+				<div id="contenttext">
+					<div class="bodytext" style="padding:12px;" align="justify">
+                         {% block content %}{% endblock %}
+              		</div>
+			</div>	
+			<div id="footer" class="smallgraytext">
+				Jukitech Group Oy
+				&copy; 2017 
+			</div>
+		</div>
+	</div>
+</body>
+</html>

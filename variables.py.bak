@@ -1,0 +1,7 @@
+import sys
+sys.path.insert(0, '/home/jukka/Flasktest/jms')
+import routes 
+
+pvm11 = routes.posti.pvm1
+
+print (pvm11)

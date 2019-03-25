@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+<head>
+<script>function openconsole() {window.open("http://192.168.1.201:6060");}</script>
+</head>
+<body>
+ {% block content %}
+<table class="blueTable">
+<tbody>
+<tr>
+<td><h2>Jarjestelma</h2></td></tr>
+<tr>
+<td>{{ os }}, {{ release }}, {{host}} </td></tr>
+<tr>
+<tr>
+<td>Kaynnissaolo aika : {{ uptime_aika }} </td></tr>
+<tr>
+<tr>
+<td>Viimeksi kaynnistetty : {{ uptime_kaynnistetty }} </td></tr>
+<tr>
+<td><h2>Muisti</h2></td></tr>
+<tr>
+<td>Kokonaismuisti : {{kokonaismuisti}}</td></tr>
+<tr>
+<tr>
+<td>Vapaana oleva muisti : {{vapaamuisti}}</td></tr>
+<tr>
+<td><h2>Tallennus</h2></td></tr>
+<tr>
+<td>Kokonaistallennustila : {{levytiedot}}</td></tr>
+<tr>
+<tr>
+<td>Vapaa Levytila : {{levynkaytto}}</td></tr>
+<tr>
+<td><h2>Verkkoyhteydet</h2></td></tr>
+<tr>
+<td>IP-Osoite : {{nettiosoite}}</td></tr>
+<tr>
+<tr>
+<td>Verkkomaski :  {{subnet}}</td></tr>
+<tr>
+<td>Yhdyskaytava :  {{gateway}}</td></tr>
+<tr>
+<td>cell1_12</td></tr>
+</tbody>
+</tr>
+</table>
+{% endblock %}
+</body>
+
+

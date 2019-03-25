@@ -1,0 +1,228 @@
+{% extends "base.html" %}
+<head>
+</head>
+<body>
+ {% block content %}
+<table class="blueTable">
+<tbody>
+<tr>
+<td><h2>System</h2></td></tr>
+<tr>
+<td>{{ os }}, {{ release }}, {{host}} </td></tr>
+<tr>
+<tr>
+<td>System date and time : {{ livetime }} </td></tr>
+<tr>
+<tr>
+<td>Uptime : {{ uptime_aika }} </td></tr>
+<tr>
+<tr>
+<td>last boot : {{ uptime_kaynnistetty }} </td></tr>
+<tr>
+<td><h2>Memory</h2></td></tr>
+<tr>
+<td>Total memory : {{kokonaismuisti}}</td></tr>
+<tr>
+<tr>
+<td>Free memory : {{vapaamuisti}}</td></tr>
+<tr>
+<td><h2>Storage</h2></td></tr>
+<tr>
+<td>Storage : {{levytiedot}}</td></tr>
+<tr>
+<tr>
+<td>Free : {{levynkaytto}}</td></tr>
+<tr>
+<td><h2>Network</h2></td></tr>
+<tr>
+<td>IP-Address : {{nettiosoite}}</td></tr>
+<tr>
+<tr>
+<td>Subnet mask :  {{subnet}}</td></tr>
+<tr>
+<tr>
+<td>Gateway :  {{gateway}}</td></tr>
+<tr>
+<td><h2>Other</h2></td></tr>
+<tr>
+<script>function openconsole() {window.open("http://192.168.44.111:6060");}</script>
+<td><input type="button" value="StartConsole" onclick="openconsole()"></td></tr><br><br>
+<td><form action="http://192.168.44.111:9001">
+    <input type="submit" value="Open Supervisor" />
+</form></td>
+<tr>
+</tbody>
+</tr>
+</table>
+Variables :
+<form action = "http://192.168.44.111/yllapito" method="POST">
+    Sensor Number : 
+                    <input type="radio" name="Sensor1" value="Sensor1">Sensor1
+    				<input type="radio" name="Sensor1" value="Sensor2">Sensor2
+    				<input type="radio" name="Sensor1" value="Sensor3">Sensor3
+    				<input type="radio" name="Sensor1" value="Sensor4">Sensor4<br><br>
+    				<input type="radio" name="Sensor1" value="Sensor5">Sensor5
+    				<input type="radio" name="Sensor1" value="Sensor6">Sensor6
+    				<input type="radio" name="Sensor1" value="Sensor7">Sensor7
+    				<input type="radio" name="Sensor1" value="Sensor8">Sensor8<br><br>
+    				<input type="radio" name="Sensor1" value="Sensor9">Sensor9
+    				<input type="radio" name="Sensor1" value="Sensor10">Sensor10
+    				<input type="radio" name="Sensor1" value="Sensor11">Sensor11
+    				<input type="radio" name="Sensor1" value="Sensor12">Sensor12<br><br>
+    				<input type="radio" name="Sensor1" value="Sensor13">Sensor13
+    				<input type="radio" name="Sensor1" value="Sensor14">Sensor14
+    				<input type="radio" name="Sensor1" value="Sensor15">Sensor15
+    				<input type="radio" name="Sensor1" value="Sensor16">Sensor16
+    				<br><br>
+    Sensor Enable : 
+                    <input type="radio" name="sensor_enabled" value="yes">Yes
+    				<input type="radio" name="sensor_enabled" value="no">No
+    				<br><br>
+    Livedata Delay Seconds: <input name="livedata_delay" value="0" size="35"> (Only When "Sensor1" is selected)<br><br>
+    History Data Delay Minutes : <input name="historydata_delay" value="0" size="35"> (Only When "Sensor1" is selected)<br><br>
+    Graph Type :	
+                    <input type="radio" name="Bar" value="Bar">Bar
+    				<input type="radio" name="Bar" value="Line">Line
+    			    <br><br>
+    Graph Y-Size px : <input name="y_size" value="0" size="35"><br><br>
+    Graph X-Size px : <input name="x_size" value="0" size="35"><br><br>
+    Graph Color : 	
+                    <input type="radio" name="red" value="red">Red
+    				<input type="radio" name="red" value="blue">Blue
+    				<input type="radio" name="red" value="green">Green
+    				<input type="radio" name="red" value="orange">Orange
+					<br><br>
+    Graph Y-Scale Max : <input name="y_scale_max" value="0" size="35"><br>
+    Graph Y-Scale Min : <input name="y_scale_min" value="0" size="35"><br>
+   
+    Line or Bar width : <input name="line_width" value="0" size="35"><br>
+        
+        <input type="submit" Value="Submit">
+        
+        
+    </form>
+<br><br><br>
+<table class="blueTable">
+<tr>
+{% for key, value in json_config_1.items() %}
+        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_2.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+   </tr>
+<tr>
+{% for key, value in json_config_3.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_4.items() %}       
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+</table>
+
+
+<br><br><br>
+
+
+<table class="blueTable">
+<tr>
+{% for key, value in json_config_5.items() %}
+        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_6.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+   </tr>
+<tr>
+{% for key, value in json_config_7.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_8.items() %}       
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+</table>
+<br><br><br>
+<table class="blueTable">
+<tr>
+{% for key, value in json_config_9.items() %}
+        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_10.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+   </tr>
+<tr>
+{% for key, value in json_config_11.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_12.items() %}       
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+</table>
+
+
+<br><br><br>
+
+
+<table class="blueTable">
+<tr>
+{% for key, value in json_config_13.items() %}
+        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_14.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+   </tr>
+<tr>
+{% for key, value in json_config_15.items() %}        
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+<tr>
+{% for key, value in json_config_16.items() %}       
+        <th> {{ key }} </th>
+        <td> {{ value }} </td>
+    {% endfor %}
+</tr>
+</table>
+    
+{% endblock %}
+</body>
+
+

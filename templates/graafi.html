@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+<html>
+    <head>
+    </head>
+    <body>
+      {% block content %}  
+    Start Date, {{ pvm1 }}!<br>
+   Stop Date, {{ pvm2 }}!<br>
+   {{ script | safe }}
+      {% endblock %}  
+    </body>
+</html>

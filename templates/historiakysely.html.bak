@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+<html>
+    <head>
+        <title>Jukitech Measure System</title>
+    </head>
+    <body>
+      {% block content %}  
+    
+     Syota tarvittavat tiedot:<br>
+    <form action = "http://192.168.1.214:5000/graafi"method="POST">
+    Aloitusaika :<br>
+        <input name="pvm1" Value="Aloitusaika muodossa VVVV-KK-PP TT-MM-SS" size="35"><br>
+     Lopetusaika: <br>   
+        <input name="pvm2" Value="Lopetusaika muodossa VVVV-KK-PP TT-MM-SS" size="35"><br>
+    <br><br> Valitse tarvittavat anturit:<br>
+        <input type="checkbox" name="Sensor1" value="Sensor1">Sensor1
+        <input type="checkbox" name="Sensor2" value="Sensor2">Sensor2
+        <input type="checkbox" name="Sensor3" value="Sensor3">Sensor3
+        <input type="checkbox" name="Sensor4" value="Sensor4">Sensor4<br>
+        <input type="checkbox" name="Sensor5" value="Sensor5">Sensor5
+        <input type="checkbox" name="Sensor6" value="Sensor6">Sensor6
+        <input type="checkbox" name="Sensor7" value="Sensor7">Sensor7
+        <input type="checkbox" name="Sensor8" value="Sensor8">Sensor8<br>
+        <input type="submit" Value="Hae tiedot">
+        
+        
+    </form>
+    
+    
+    {% endblock %}
+    </body>
+</html>

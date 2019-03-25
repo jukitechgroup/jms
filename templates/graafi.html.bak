@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+<html>
+    <head>
+        <title>{{ title }} - Jukitech Measure System</title>
+    </head>
+    <body>
+      {% block content %}  
+    aloituspvm, {{ pvm1 }}!<br>
+   aloituspvm, {{ pvm2 }}!<br>
+    testi {{ script | safe }}
+      {% endblock %}  
+    </body>
+</html>
