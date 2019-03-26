@@ -20,7 +20,7 @@ from time import sleep
 import threading
 import memcache
 
-#------ Luetaan Json configit --------------------
+#------ Read Json Configs --------------------
 
 def config(json_path):
     with open(json_path, 'r') as f:
@@ -64,7 +64,7 @@ sensor16_enable = (json_config_16['sensor_enable'])
 livedata_delay0 = int(json_config_1['livedata_delay'])  * 1000
 #historydata_delay0 = int(json_config_1['historydata_delay'] * 1000 * 60 )
 
-# ------------- Haetaan antureiden arvot memcachesta --------------------
+# ------------- Fetch Sensor Data from memcache --------------------
 def data():
     while True:
         try:
@@ -105,15 +105,16 @@ def data():
         except:
             continue
 
-# Aloitetaan thread memcache threading
+#  --- Start data function to background -----------
+
 db_data = threading.Thread(target=data)
 db_data.start()
 
 # -----------------------------------------------------------------------
 
-# --- Muuttujat ------------------------------- 
+# --- Variables -------------------------------
 
-# --- Haetaan jsoneista muuttujat
+# --- Fetch Variables from JSONs  --------------------
 
 y_scale_min0 = int(json_config_1['y_scale_min'])
 y_scale_max0 = int(json_config_1['y_scale_max'])
@@ -347,23 +348,23 @@ xxx16 = list(range(1))											# 16-Graafin x-muuttuja lista (1-Luku)
 yyy16 = deque(1*[0],1)											# 16-Graafin y-muuttuja FIFO Lista (1-luku)
 
 
-aika1 = list(range(1))											#  Muuttuja ajalle
-aika = deque(1*[0],1)											#  Muuttuja ajalle
+aika1 = list(range(1))											#  Variable To Time
+aika = deque(1*[0],1)											#  Variable To Time
 
 
-#------ Funktio ajalle -----
+#------ Function To Time -----
 def time():
     aika = [strftime("%Y-%m-%d %H:%M:%S")]
     #print(aika)
     return dict(x=aika, y=aika1)
 #---------------------------
 
-#------Funktiot Pylväs graafille----
+#------Functions to Bar Graph----
 def dada1():
-    yyy = [y[0]]												# Valitaan Y-Fifosta viimeisin luku
-    value = y[0]												# Muutetaan Y-Fifon viimeisin luku tietokantaa varten stringiksi
-    aika = strftime("%Y-%m-%d %H:%M:%S")						# Aika tietokantaa varten 
-    return dict(x=xxx, y=yyy)									# Palautetaan päivitetyt x ja y tiedot								
+    yyy = [y[0]]												# Select Last Number Of Y-FIFO
+    value = y[0]												# Change Last Number Of Y-FIFO to String
+    aika = strftime("%Y-%m-%d %H:%M:%S")						# Time For Database
+    return dict(x=xxx, y=yyy)									# Return Updated X and Y Data
 
 def dada2():
     yyy2 = [y2[0]]
@@ -458,7 +459,7 @@ def dada16():
 
 #--------------------------------------------------------------
 
-#------- Funktiot Viiva graafeille ----------------------------
+#------- Functions To Line Graph ----------------------------
 def daata1():		
     y.appendleft(sensor1_data)										
     return dict(x=x,y=y)
@@ -524,7 +525,7 @@ def daata16():
     return dict(x=x16,y=y16)
 #--------------------------------------------------------------
 
-#--------- Tehdään datasta bokehille sopiva ColumnDataSource -------------------------
+#--------- Make Data to ColumnDataSource For Bokeh -------------------------
 
 source_data1 = ColumnDataSource(data=dict(x=x, y=y))
 source_data2 = ColumnDataSource(data=dict(x=x2, y=y2))
@@ -608,7 +609,7 @@ graph15 = graafit(sensor15_enable, graph_type14, 'graph15', 'Sensor15', y_scale_
 graph16 = graafit(sensor16_enable, graph_type15, 'graph16', 'Sensor16', y_scale_min15, y_scale_max15, y_size15, x_size15, line_width15, source_data16, source_data32, graph_color15)  
           
 
-# --- Ajan näyttö sivulle ----
+# --- Time graph ----
 
 graph20 = figure(x_axis_type='datetime', title="Systemtime", y_range=(0, 7), logo = None, plot_height=60, plot_width=220)
 piilotettava = graph20.vbar(width = 1, source = source_data9, x='y', color="blue", top='y', line_width=15)							# Tehdään graafista muuttuja joka voidaan piilottaa..
@@ -626,10 +627,13 @@ graph20.yaxis.visible = False						# Piilotetaan y-akseli
 
 grid = gridplot([[graph20],[graph1, graph2, graph3, graph4], [ graph5, graph6, graph7, graph8], [graph9, graph10, graph11, graph12], [graph13, graph14, graph15, graph16]], toolbar_location=None, width=1000, height=1000)       
 
-#------------ Laitetaan graafit esille ----------------------------------------------------------------------
+#------------ Show The Graphs ----------------------------------------------------------------------
+
 curdoc().add_root(row(grid))
 curdoc().title = "JMS"
+# --------------------------------------------
 
+# ----------- Updates ... --------------------
 @count()
 def update(t):
     if (sensor1_enable):
@@ -688,7 +692,7 @@ def update_time(t):
     source_data20.data = time()
 
 
-curdoc().add_periodic_callback(update, livedata_delay0) # Päivitysväli millisekunteina
-curdoc().add_periodic_callback(update_time, 1000) # Kellon päivitys joka sekunti
+curdoc().add_periodic_callback(update, livedata_delay0) # Update in milliseconds
+curdoc().add_periodic_callback(update_time, 1000) # Clock Update Every Second
 curdoc().title = "JMS"
 #------------------------------------------------------------------------------------------------------------
