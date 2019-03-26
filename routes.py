@@ -16,7 +16,7 @@ from threading import Thread
 from json2html import *
 
 
-#----------------- Ylläpitomuuttujat-----------------------------------------------
+#----------------- Variables for maintenance -----------------------------------------------
 
 
 livetime = strftime("%Y-%m-%d %H:%M:%S")
@@ -40,7 +40,7 @@ processor = str(round(percent)) + '%'
 
 #--------------------------------------------------------------------------------
 
-# -------------------CSV ja Database muuttujat ----------------------------------
+# -------------------CSV ja Database Variables ----------------------------------
 
 db_dir = '/home/maintenance/jms/jms/data/measure.db'
 csv1 = '/home/maintenance/jms/jms/data/out1.csv'
@@ -54,7 +54,7 @@ csv8 = '/home/maintenance/jms/jms/data/out8.csv'
 
 #--------------------------------------------------------------------------------
 
-# -----------Datan haku funktiot ------------------------------------------------
+# -----------Data Fetch Functions ------------------------------------------------
 
 def sensor11():
      con = lite.connect(db_dir)
@@ -146,7 +146,7 @@ def sensor18():
 
 # ------------------------------------------------------------------------------
 
-# ---------------Flask Routet alkaa --------------------------------------------
+# ---------------Flask Routes Begins ... --------------------------------------------
 
 @jms.route('/')
 @jms.route('/index', methods=['GET', 'POST'])
@@ -163,9 +163,8 @@ def historia():
     return render_template('historiakysely.html', title='JMS', livetime=livetime)
 
 
-# ----------------- Kysellään mitkä sensorit laitetaan esille  ja kirjoitetaan siitä json-tiedosto
-# history_graph.py lukee tämän Json taulukon kun hakee dataa.
-# Kysellään päivämäärät.
+# Select Whitch Sensors Are Shown And Write JSON File From That. history_graph.py Reads This File When it Collects Data.
+# We Ask For Dates Here Too..
 
 @jms.route('/graafi', methods=['GET', 'POST'])
 def posti():
@@ -213,9 +212,10 @@ def posti():
         if (sensor8):
             sensor18()
         
-        script = server_document(url="http://192.168.44.111:5006/history_graph")
+        script = server_document(url="http://192.168.44.111:5006/history_graph") #
     
     return render_template('graafi.html',  pvm1 = pvm1, pvm2 = pvm2, script = script, title='JMS', livetime=livetime)
+
 # ------------------------------------------------------------------------------------    
 
 @jms.route('/yllapito', methods=['GET', 'POST'])
@@ -235,21 +235,7 @@ def yllapito():
         sensor_enabled = request.form['sensor_enabled']
         graph_color = request.form['red']
         graph_type = request.form['Bar']
-        #sensor_one = 'Sensor1' in request.form
-        #sensor_two = 'Sensor2' in request.form
-        #sensor_three = 'Sensor3' in request.form
-        #sensor_four = 'Sensor4' in request.form
-        
-        #sensor_enable = 'sensor enable' in request.form
-        #sensor_disable = 'sensor disable' in request.form
-        
-        #bar = 'Bar' in request.form
-        #line = 'Line' in request.form
-        
-        #red = 'red' in request.form
-        #blue = 'blue' in request.form
-        #green = 'green' in request.form
-        #orange = 'orange' in request.form
+
         def json_configit(Sensor_name, json_path):
             nonlocal y_scale_max
             nonlocal y_scale_min
@@ -271,9 +257,7 @@ def yllapito():
                     f.close
                 print(testi)
                 return testi
-            #else:
-            #    pass
-           
+
         sensor0 = json_configit("Sensor1", '/home/maintenance/jms/jms/data/jms_config_1.json')
         sensor2 = json_configit("Sensor2", '/home/maintenance/jms/jms/data/jms_config_2.json')
         sensor3 = json_configit("Sensor3", '/home/maintenance/jms/jms/data/jms_config_3.json')
@@ -290,36 +274,7 @@ def yllapito():
         sensor14 = json_configit("Sensor14", '/home/maintenance/jms/jms/data/jms_config_14.json')
         sensor15 = json_configit("Sensor15", '/home/maintenance/jms/jms/data/jms_config_15.json')
         sensor16 = json_configit('Sensor16', '/home/maintenance/jms/jms/data/jms_config_16.json')
-        """
-        if (sensor1 == "Sensor2"):
-            sensori2 = {"sensor_number": sensor1, "sensor_enable": sensor_enabled,  "graph_color": graph_color, "graph_type": graph_type,
-            "livedata_delay": livedata_delay, "historydata_delay": historydata_delay, "y_scale_max": y_scale_max, "y_scale_min": y_scale_min,
-            "line_width": line_width, "y_size": y_size, "x_size": x_size}
-            with open('/home/maintenance/jms/jms/data/jms_config_2.json', 'w') as f:
-                f.write(json.dumps(sensori2))
-                f.close
-            print(sensori2)
-           
-            
-        if (sensor1 == "Sensor3"):
-            sensori3 = {"sensor_number": sensor1, "sensor_enable": sensor_enabled,  "graph_color": graph_color, "graph_type": graph_type,
-            "livedata_delay": livedata_delay, "historydata_delay": historydata_delay, "y_scale_max": y_scale_max, "y_scale_min": y_scale_min,
-            "line_width": line_width, "y_size": y_size, "x_size": x_size}
-            with open('/home/maintenance/jms/jms/data/jms_config_3.json', 'w') as f:
-                f.write(json.dumps(sensori3))
-                f.close
-            print(sensori3)
-           
-            
-        if (sensor1 == "Sensor4"):
-            sensori4 = {"sensor_number": sensor1, "sensor_enable": sensor_enabled,  "graph_color": graph_color, "graph_type": graph_type,
-            "livedata_delay": livedata_delay, "historydata_delay": historydata_delay, "y_scale_max": y_scale_max, "y_scale_min": y_scale_min,
-            "line_width": line_width, "y_size": y_size, "x_size": x_size}
-            with open('/home/maintenance/jms/jms/data/jms_config_4.json', 'w') as f:
-                f.write(json.dumps(sensori4))
-                f.close
-            print(sensori4)
-         """
+
     def config(json_path):
         with open(json_path, 'r') as f:
             config = json.load(f)
@@ -344,39 +299,6 @@ def yllapito():
     json_config_16 = config('/home/maintenance/jms/jms/data/jms_config_16.json')
     print (json_config_16)
 
-    """
-    with open('/home/maintenance/jms/jms/data/jms_config_1.json', 'r') as f:
-        json_config_1 = json.load(f)
-        #print(json_config_1)
-        f.close
-    
-    with open('/home/maintenance/jms/jms/data/jms_config_2.json', 'r') as f:
-	    json_config_2 = json.load(f)
-	    #print(json_config_2)
-	    f.close
-	
-    with open('/home/maintenance/jms/jms/data/jms_config_3.json', 'r') as f:
-	    json_config_3 = json.load(f)
-	    #print(json_config_3)
-	    f.close
-	
-    with open('/home/maintenance/jms/jms/data/jms_config_4.json', 'r') as f:
-	    json_config_4 = json.load(f)
-	    #print(json_config_4)
-	    f.close	      
-    """
-    
-            
-    #combined_config_json = {k: (json_config_1, json_config_2, json_config_3, json_config_4[k], v) for k, v in json_config_2.items() if k in json_config_1}
-    #combined_config_json = json_config_1, json_config_2, json_config_3, json_config_4
-    #{k:[d.get(k) for d in combined_config_json] for k in {k for d in combined_config_json for k in d}}  
-    #combined_config_json = {}
-    #for k in json_config_1:
-    #    combined_config_json[k] = tuple(combined_config_json[k] for combined_config_json in temppi)
-    
-    #with open('/home/maintenance/jms/jms/static/combined_config.json', 'w') as f:
-    #    f.write(json.dumps(combined_config_json))
-    #    f.close    
         
     return render_template('yllapito.html', os=os, release=release, 
              host=hostname, uptime_aika=uptime_aika, uptime_kaynnistetty=uptime_kaynnistetty,
@@ -390,4 +312,4 @@ def yllapito():
             json_config_11=json_config_11, json_config_12=json_config_12, json_config_13=json_config_13,
             json_config_14=json_config_14, json_config_15=json_config_15, json_config_16=json_config_16)
             
-# ---------------- Flask routet loppuu
+# ---------------- Flask routes ends
