@@ -28,3 +28,6 @@ Scripts : <br><br>
 db.py   --  Collects data from sensors and put them to database <br>
 live_graph.py  --  Generates graphs to live view <br>
 history_graph.py  -- Generates graphs to history view <br>
+
+
+Screenshots : https://jukitech.fi/pics/index.php?twg_album=JMS-Software&twg_show=x
