@@ -8,14 +8,14 @@ from pandas import DataFrame, read_csv
 import json
 
 
-# --------- Katsotaan mitkä sensorit on valittu -------------------
+# --------- Check selected sensors -------------------
 
 with open('/home/maintenance/jms/jms/data/sensor_enabled.json', 'r') as f:
     json_data = json.load(f)
     
 #------------------------------------------------------------------
 
-# ----------------- Luodaan antureille csv polut --------------------
+# ----------------- Create CSV Paths  --------------------
 
 file1 = r'/home/maintenance/jms/jms/data/out1.csv'
 file2 = r'/home/maintenance/jms/jms/data/out2.csv'
@@ -27,7 +27,7 @@ file7 = r'/home/maintenance/jms/jms/data/out7.csv'
 file8 = r'/home/maintenance/jms/jms/data/out8.csv'
 #-------------------------------------------------------------------
 
-# ----------------- Luodaan pandas datataulukot ---------------------
+# ----------------- Create Pandas datatables ---------------------
 
 data1 = pd.read_csv(file1)
 data2 = pd.read_csv(file2)
@@ -39,7 +39,7 @@ data7 = pd.read_csv(file7)
 data8 = pd.read_csv(file8)
 #------------------------------------------------------------------
 
-# ----------------- Poistetaan tyhjät ja NaN:it taulukosta---------
+# ----------------- Remove Empty sines and NaNs ---------
 
 data1 = data1.dropna()
 data2 = data2.dropna()
@@ -51,7 +51,7 @@ data7 = data7.dropna()
 data8 = data8.dropna()
 #-----------------------------------------------------------------
 
-# --------------------Muutetaan päivämäärät datetime objektiksi ---
+# --------------------Change dates to datetime objects ---
 
 data1['aika'] = pd.to_datetime(data1['aika'])
 data2['aika'] = pd.to_datetime(data2['aika'])
@@ -77,7 +77,7 @@ data8['smoothed'] = data8['arvo'].rolling(5).mean()
 
 #------------------------------------------------------------------
 
-# ----------------------Speksit taulukoista -----------------------
+# ----------------------Specs from tables -----------------------
 
 data1['mean'] =  data1['arvo'].mean()
 data2['mean'] =  data2['arvo'].mean()
@@ -195,7 +195,7 @@ print (final_specs)
 
 # -----------------------------------------------------------------
 
-# ------- Muutetaan data bokehille sopivaksi ColumnDataSourceksi --
+# ------- Change data to ColumnDataSourceksi for Bokeh--
 
 source_data1 = ColumnDataSource(data1)
 source_data2 = ColumnDataSource(data2)
@@ -214,7 +214,7 @@ source_data99 = ColumnDataSource(final_specs)
 
 
 
-# -------- Tehdään Graafi -----------------------------------------
+# -------- Lets make Graph-----------------------------------------
 
 plot = figure(x_axis_type='datetime' ,plot_height=400, plot_width=800, title="History", logo = None) 
 plot.add_tools(HoverTool(tooltips=[('Aika',  '@aika{%F %H-%M-%S}'),('Arvo', '$y')],formatters={'aika'      : 'datetime'}))
