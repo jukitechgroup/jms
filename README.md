@@ -6,7 +6,7 @@ This project is about making Raspberry Pi as data collector and also live displa
 
 Used packages/Libraries : <br>
 
-pymemcache  --  https://github.com/pinterest/pymemcache <br>
+memcache  --  http://memcached.org/ <br>
 MinimalModbus  --  https://pypi.org/project/MinimalModbus/ <br>
 sqlite3  --   https://docs.python.org/2/library/sqlite3.html <br> 
 Flask  --  http://flask.pocoo.org/ <br>
