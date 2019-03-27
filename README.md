@@ -30,4 +30,10 @@ live_graph.py  --  Generates graphs to live view <br>
 history_graph.py  -- Generates graphs to history view <br>
 
 
-Screenshots : https://jukitech.fi/pics/index.php?twg_album=JMS-Software&twg_show=x
+Screenshots : https://jukitech.fi/pics/index.php?twg_album=JMS-Software&twg_show=x <br><br>
+
+Used Hardware :<br>
+Raspberry Pi 3+  --  https://www.raspberrypi.org/products/raspberry-pi-3-model-b/ <br>
+RTC-Module  --  https://thepihut.com/products/mini-rtc-module-for-raspberry-pi  <br>
+RS485 <--> Serial Converter  --  https://www.aliexpress.com/item/TTL-to-RS485-Converter-Module-3-3V-5-0V-Hardware-Auto-Control-for-Arduino-AVR/32837392872.html <br>
+
