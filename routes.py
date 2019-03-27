@@ -42,15 +42,15 @@ processor = str(round(percent)) + '%'
 
 # -------------------CSV ja Database Variables ----------------------------------
 
-db_dir = '/home/maintenance/jms/jms/data/measure.db'
-csv1 = '/home/maintenance/jms/jms/data/out1.csv'
-csv2 = '/home/maintenance/jms/jms/data/out2.csv'
-csv3 = '/home/maintenance/jms/jms/data/out3.csv'
-csv4 = '/home/maintenance/jms/jms/data/out4.csv'
-csv5 = '/home/maintenance/jms/jms/data/out5.csv'
-csv6 = '/home/maintenance/jms/jms/data/out6.csv'
-csv7 = '/home/maintenance/jms/jms/data/out7.csv'
-csv8 = '/home/maintenance/jms/jms/data/out8.csv'
+db_dir = '/home/jms/JMS/data/measure.db'
+csv1 = '/home/jms/JMS/data/out1.csv'
+csv2 = '/home/jms/JMS/data/out2.csv'
+csv3 = '/home/jms/JMS/data/out3.csv'
+csv4 = '/home/jms/JMS/data/out4.csv'
+csv5 = '/home/jms/JMS/data/out5.csv'
+csv6 = '/home/jms/JMS/data/out6.csv'
+csv7 = '/home/jms/JMS/data/out7.csv'
+csv8 = '/home/jms/JMS/data/out8.csv'
 
 #--------------------------------------------------------------------------------
 
@@ -155,7 +155,7 @@ def index():
 
 @jms.route('/live')
 def live():
-   script = server_document(url="http://192.168.44.111:5006/live_graph")
+   script = server_document(url="http://192.168.1.202:5006/live_graph")
    return render_template('live.html',  script = script, title='JMS')
 
 @jms.route('/historia')
@@ -185,7 +185,7 @@ def posti():
         sensors_enabled = {"sensor1": sensor1,  "sensor2":sensor2, "sensor3":sensor3, "sensor4": sensor4,  "sensor5":sensor5, "sensor6":sensor6,  "sensor7":sensor7, "sensor8":sensor8} #, sensor4, sensor5, sensor6, sensor7, sensor8 ]
         print (sensors_enabled)
          
-        with open('/home/maintenance/jms/jms/data/sensor_enabled.json', 'w') as f:
+        with open('/home/jms/JMS/data/sensor_enabled.json', 'w') as f:
               f.write(json.dumps(sensors_enabled))
         
         if (sensor1):
@@ -212,7 +212,7 @@ def posti():
         if (sensor8):
             sensor18()
         
-        script = server_document(url="http://192.168.44.111:5006/history_graph") #
+        script = server_document(url="http://192.168.1.202:5006/history_graph") #
     
     return render_template('graafi.html',  pvm1 = pvm1, pvm2 = pvm2, script = script, title='JMS', livetime=livetime)
 
@@ -258,22 +258,22 @@ def yllapito():
                 print(testi)
                 return testi
 
-        sensor0 = json_configit("Sensor1", '/home/maintenance/jms/jms/data/jms_config_1.json')
-        sensor2 = json_configit("Sensor2", '/home/maintenance/jms/jms/data/jms_config_2.json')
-        sensor3 = json_configit("Sensor3", '/home/maintenance/jms/jms/data/jms_config_3.json')
-        sensor4 = json_configit("Sensor4", '/home/maintenance/jms/jms/data/jms_config_4.json')
-        sensor5 = json_configit("Sensor5", '/home/maintenance/jms/jms/data/jms_config_5.json')
-        sensor6 = json_configit("Sensor6", '/home/maintenance/jms/jms/data/jms_config_6.json')
-        sensor7 = json_configit("Sensor7", '/home/maintenance/jms/jms/data/jms_config_7.json')
-        sensor8 = json_configit("Sensor8", '/home/maintenance/jms/jms/data/jms_config_8.json')
-        sensor9 = json_configit("Sensor9", '/home/maintenance/jms/jms/data/jms_config_9.json')
-        sensor10 = json_configit("Sensor10", '/home/maintenance/jms/jms/data/jms_config_10.json')
-        sensor11 = json_configit("Sensor11", '/home/maintenance/jms/jms/data/jms_config_11.json')
-        sensor12 = json_configit("Sensor12", '/home/maintenance/jms/jms/data/jms_config_12.json')
-        sensor13 = json_configit("Sensor13", '/home/maintenance/jms/jms/data/jms_config_13.json')
-        sensor14 = json_configit("Sensor14", '/home/maintenance/jms/jms/data/jms_config_14.json')
-        sensor15 = json_configit("Sensor15", '/home/maintenance/jms/jms/data/jms_config_15.json')
-        sensor16 = json_configit('Sensor16', '/home/maintenance/jms/jms/data/jms_config_16.json')
+        sensor0 = json_configit("Sensor1", '/home/jms/JMS/data/jms_config_1.json')
+        sensor2 = json_configit("Sensor2", '/home/jms/JMS/data/jms_config_2.json')
+        sensor3 = json_configit("Sensor3", '/home/jms/JMS/data/jms_config_3.json')
+        sensor4 = json_configit("Sensor4", '/home/jms/JMS/data/jms_config_4.json')
+        sensor5 = json_configit("Sensor5", '/home/jms/JMS/data/jms_config_5.json')
+        sensor6 = json_configit("Sensor6", '/home/jms/JMS/data/jms_config_6.json')
+        sensor7 = json_configit("Sensor7", '/home/jms/JMS/data/jms_config_7.json')
+        sensor8 = json_configit("Sensor8", '/home/jms/JMS/data/jms_config_8.json')
+        sensor9 = json_configit("Sensor9", '/home/jms/JMS/data/jms_config_9.json')
+        sensor10 = json_configit("Sensor10", '/home/jms/JMS/data/jms_config_10.json')
+        sensor11 = json_configit("Sensor11", '/home/jms/JMS/data/jms_config_11.json')
+        sensor12 = json_configit("Sensor12", '/home/jms/JMS/data/jms_config_12.json')
+        sensor13 = json_configit("Sensor13", '/home/jms/JMS/data/jms_config_13.json')
+        sensor14 = json_configit("Sensor14", '/home/jms/JMS/data/jms_config_14.json')
+        sensor15 = json_configit("Sensor15", '/home/jms/JMS/data/jms_config_15.json')
+        sensor16 = json_configit('Sensor16', '/home/jms/JMS/data/jms_config_16.json')
 
     def config(json_path):
         with open(json_path, 'r') as f:
@@ -281,22 +281,22 @@ def yllapito():
             f.close
             return config
             
-    json_config_1 = config('/home/maintenance/jms/jms/data/jms_config_1.json')
-    json_config_2 = config('/home/maintenance/jms/jms/data/jms_config_2.json')
-    json_config_3 = config('/home/maintenance/jms/jms/data/jms_config_3.json')
-    json_config_4 = config('/home/maintenance/jms/jms/data/jms_config_4.json')
-    json_config_5 = config('/home/maintenance/jms/jms/data/jms_config_5.json')
-    json_config_6 = config('/home/maintenance/jms/jms/data/jms_config_6.json')
-    json_config_7 = config('/home/maintenance/jms/jms/data/jms_config_7.json')
-    json_config_8 = config('/home/maintenance/jms/jms/data/jms_config_8.json')
-    json_config_9 = config('/home/maintenance/jms/jms/data/jms_config_9.json')
-    json_config_10 = config('/home/maintenance/jms/jms/data/jms_config_10.json')
-    json_config_11 = config('/home/maintenance/jms/jms/data/jms_config_11.json')
-    json_config_12 = config('/home/maintenance/jms/jms/data/jms_config_12.json')
-    json_config_13 = config('/home/maintenance/jms/jms/data/jms_config_13.json')
-    json_config_14 = config('/home/maintenance/jms/jms/data/jms_config_14.json')
-    json_config_15 = config('/home/maintenance/jms/jms/data/jms_config_15.json')
-    json_config_16 = config('/home/maintenance/jms/jms/data/jms_config_16.json')
+    json_config_1 = config('/home/jms/JMS/data/jms_config_1.json')
+    json_config_2 = config('/home/jms/JMS/data/jms_config_2.json')
+    json_config_3 = config('/home/jms/JMS/data/jms_config_3.json')
+    json_config_4 = config('/home/jms/JMS/data/jms_config_4.json')
+    json_config_5 = config('/home/jms/JMS/data/jms_config_5.json')
+    json_config_6 = config('/home/jms/JMS/data/jms_config_6.json')
+    json_config_7 = config('/home/jms/JMS/data/jms_config_7.json')
+    json_config_8 = config('/home/jms/JMS/data/jms_config_8.json')
+    json_config_9 = config('/home/jms/JMS/data/jms_config_9.json')
+    json_config_10 = config('/home/jms/JMS/data/jms_config_10.json')
+    json_config_11 = config('/home/jms/JMS/data/jms_config_11.json')
+    json_config_12 = config('/home/jms/JMS/data/jms_config_12.json')
+    json_config_13 = config('/home/jms/JMS/data/jms_config_13.json')
+    json_config_14 = config('/home/jms/JMS/data/jms_config_14.json')
+    json_config_15 = config('/home/jms/JMS/data/jms_config_15.json')
+    json_config_16 = config('/home/jms/JMS/data/jms_config_16.json')
     print (json_config_16)
 
         

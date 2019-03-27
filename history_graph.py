@@ -10,21 +10,21 @@ import json
 
 # --------- Check selected sensors -------------------
 
-with open('/home/maintenance/jms/jms/data/sensor_enabled.json', 'r') as f:
+with open('/home/jms/JMS/data/sensor_enabled.json', 'r') as f:
     json_data = json.load(f)
     
 #------------------------------------------------------------------
 
 # ----------------- Create CSV Paths  --------------------
 
-file1 = r'/home/maintenance/jms/jms/data/out1.csv'
-file2 = r'/home/maintenance/jms/jms/data/out2.csv'
-file3 = r'/home/maintenance/jms/jms/data/out3.csv'
-file4 = r'/home/maintenance/jms/jms/data/out4.csv'
-file5 = r'/home/maintenance/jms/jms/data/out5.csv'
-file6 = r'/home/maintenance/jms/jms/data/out6.csv'
-file7 = r'/home/maintenance/jms/jms/data/out7.csv'
-file8 = r'/home/maintenance/jms/jms/data/out8.csv'
+file1 = r'/home/jms/JMS/data/out1.csv'
+file2 = r'/home/jms/JMS/data/out2.csv'
+file3 = r'/home/jms/JMS/data/out3.csv'
+file4 = r'/home/jms/JMS/data/out4.csv'
+file5 = r'/home/jms/JMS/data/out5.csv'
+file6 = r'/home/jms/JMS/data/out6.csv'
+file7 = r'/home/jms/JMS/data/out7.csv'
+file8 = r'/home/jms/JMS/data/out8.csv'
 #-------------------------------------------------------------------
 
 # ----------------- Create Pandas datatables ---------------------
