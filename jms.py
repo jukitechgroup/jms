@@ -1,3 +1,5 @@
+from flask import Flask
 
-from jms import jms
+jms = Flask(__name__)
+jms.config['DEBUG'] = True
 
