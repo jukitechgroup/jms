@@ -1,5 +1,5 @@
 from flask import render_template, url_for, request, send_from_directory
-from jms import jms, socketio
+from jms import jms #, socketio
 import csv
 import time
 import subprocess
@@ -13,7 +13,7 @@ import json
 import psutil
 import platform
 from threading import Thread
-from json2html import *
+#from json2html import *
 
 
 #----------------- Variables for maintenance -----------------------------------------------
