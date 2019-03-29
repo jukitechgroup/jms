@@ -562,21 +562,21 @@ source_data31 = ColumnDataSource(data=dict(x=xxx15, y=yyy15))
 source_data32 = ColumnDataSource(data=dict(x=xxx16, y=yyy16))
 
 
-source_data20 = ColumnDataSource(data=dict(x=aika, y=aika1))
+source_data40 = ColumnDataSource(data=dict(x=aika, y=aika1))
 
 #------------------------------------------------------------------------------------
 
 def graafit(sensor_number_enable, graph_type_number, graph_number, title, y_range_min, y_range_max, plot_height_nro, plot_width_nro, line_width_nro, source_data_line, source_data_bar, line_color_):
     global y_scale_max6   
     if (sensor_number_enable == "yes" and graph_type_number == "Line"):
-        graph_number = figure(title=title, logo = None, y_range=((y_range_min), (y_range_max)), plot_height=plot_height_nro, plot_width=plot_width_nro)
+        graph_number = figure(title=title, y_range=((y_range_min), (y_range_max)), plot_height=plot_height_nro, plot_width=plot_width_nro)
         graph_number.line(line_width=line_width_nro, source = source_data_line,x='x',y='y', line_color=line_color_)
         graph_number.sizing_mode = 'scale_width'
         labels = LabelSet(x=10, y=10, text='y', y_units='screen', x_units='screen', level='glyph', source=source_data_bar)
         graph_number.add_layout(labels)
         print (y_range_max)
     elif (sensor_number_enable == "yes" and graph_type_number == "Bar"):
-        graph_number = figure(title=title, logo = None, y_range=((y_range_min), (y_range_max)), plot_height=plot_height_nro, plot_width=plot_width_nro)
+        graph_number = figure(title=title, y_range=((y_range_min), (y_range_max)), plot_height=plot_height_nro, plot_width=plot_width_nro)
         graph_number.vbar(width='x', source = source_data_bar,x='y', color=line_color_, top='y', line_width=line_width_nro)
         graph_number.sizing_mode = 'scale_width'
         labels = LabelSet(x=10, y=10, text='y', y_units='screen', x_units='screen', level='glyph', source=source_data_bar)
@@ -611,10 +611,10 @@ graph16 = graafit(sensor16_enable, graph_type15, 'graph16', 'Sensor16', y_scale_
 
 # --- Time graph ----
 
-graph20 = figure(x_axis_type='datetime', title="Systemtime", y_range=(0, 7), logo = None, plot_height=60, plot_width=220)
-piilotettava = graph20.vbar(width = 1, source = source_data9, x='y', color="blue", top='y', line_width=15)							# Tehdään graafista muuttuja joka voidaan piilottaa..
+graph20 = figure(x_axis_type='datetime', title="Systemtime", y_range=(0, 7), plot_height=60, plot_width=220)
+piilotettava = graph20.vbar(width = 1, source = source_data40, x='y', color="blue", top='y', line_width=15)							# Tehdään graafista muuttuja joka voidaan piilottaa..
 #graph20.sizing_mode = 'scale_width'
-labels = LabelSet(x=8, y=8, text='x', y_units='screen', x_units='screen', level='glyph', source=source_data20)
+labels = LabelSet(x=8, y=8, text='x', y_units='screen', x_units='screen', level='glyph', source=source_data40)
 graph20.add_layout(labels)
 graph20.xgrid.grid_line_color = None 				# Piilotetaan x-grid
 graph20.ygrid.grid_line_color = None				# Piilotetaan y-grid
@@ -625,7 +625,7 @@ graph20.yaxis.visible = False						# Piilotetaan y-akseli
 
 
 
-grid = gridplot([[graph20],[graph1, graph2, graph3, graph4], [ graph5, graph6, graph7, graph8], [graph9, graph10, graph11, graph12], [graph13, graph14, graph15, graph16]], toolbar_location=None, width=1000, height=1000)       
+grid = gridplot([[graph20],[graph1, graph2, graph3, graph4], [ graph5, graph6, graph7, graph8], [graph9, graph10, graph11, graph12], [graph13, graph14, graph15, graph16]], toolbar_location=None) #, plot_width=1000, plot_height=1000)
 
 #------------ Show The Graphs ----------------------------------------------------------------------
 
@@ -689,7 +689,7 @@ def update(t):
     
 @count()
 def update_time(t):
-    source_data20.data = time()
+    source_data40.data = time()
 
 
 curdoc().add_periodic_callback(update, livedata_delay0) # Update in milliseconds
